@@ -18,6 +18,7 @@ makedocs(;
                    "FeaturedGraph" => "manual/featuredgraph.md",
                    "Graph-related APIs" => "manual/graph.md",
                    "Linear algebraic APIs" => "manual/linearalgebra.md",
+                   "Edge-indexing Strucutre" => "manual/edgeindex.jl"
                ]
     ],
 )
