@@ -1,5 +1,12 @@
 """
-A indexing structure for accessing neighbors of a vertex. 
+    EdgeIndex(g)
+
+A indexing structure for accessing neighbors of a vertex.
+
+# Arguments
+
+- `g`: The reference graph. It can be a adjacency matrix, adjacency list, a `FeaturedGraph`, `SimpleGraph`, `SimpleDiGraph` (from LightGraphs), `SimpleWeightedGraph`,
+`SimpleWeightedDiGraph` (from SimpleWeightedGraphs), `MetaGraph` and `MetaDiGraph` (from MetaGraphs).
 """
 struct EdgeIndex{T<:AbstractVector{<:AbstractVector}}
     iadjl::T
@@ -16,12 +23,25 @@ function EdgeIndex(g)
     EdgeIndex(iadjl)
 end
 
+Base.show(io::IO, ei::EdgeIndex) = print(io, "EdgeIndex(Graph with (#V=", nv(ei), ", #E=", ne(ei), "))")
+
 nv(ei::EdgeIndex) = length(ei.iadjl)
 
 ne(ei::EdgeIndex) = length(unique(map(x -> x[2], vcat(Array.(ei.iadjl)...))))
 
 neighbors(ei::EdgeIndex, i) = ei.iadjl[i]
 
+"""
+    get(ei, key, default=nothing)
+
+Get edge index for a pair of vertex index.
+
+# Arguments
+
+- `ei`: An EdgeIndex object.
+- `key`: Queried pair of vertex index. For directed graph, key is `(source, sink)`.
+- `default`: Default return value if key is not found in `ei`. 
+"""
 get(ei::EdgeIndex, key::NTuple{2}, default=nothing) = get(ei, key..., default)
 get(ei::EdgeIndex, key::CartesianIndex{2}, default=nothing) = get(ei, key[1], key[2], default)
 

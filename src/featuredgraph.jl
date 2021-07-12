@@ -17,6 +17,7 @@ A feature-equipped graph structure for passing graph to layer in order to provid
 References to graph or features are hold in this type.
 
 # Arguments
+
 - `graph`: should be a adjacency matrix, `SimpleGraph`, `SimpleDiGraph` (from LightGraphs) or `SimpleWeightedGraph`,
 `SimpleWeightedDiGraph` (from SimpleWeightedGraphs).
 - `node_feature`: node features attached to graph.
